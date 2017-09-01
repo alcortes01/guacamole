@@ -1,4 +1,5 @@
-# guacamole
+# Apache Guacamole
 
-TODO: Enter the cookbook description here.
-
+This chef cookbook install Apache Guacamole:
+* Guacamole server
+* Guacamole client
