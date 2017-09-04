@@ -18,5 +18,15 @@ describe 'guacamole::default' do
     it 'converges successfully' do
       expect { chef_run }.to_not raise_error
     end
+
+    it 'installs required dependencies'
+    it 'installs optional dependencies'
+    it 'downloads the server source code'
+    it 'builds and installs the server code'
+    it 'downloads the client source code'
+    it 'packages the client as a war file'
+    it 'deploys the client war file'
+    it 'starts guacamole client'
+    it 'starts guacamole server'
   end
 end

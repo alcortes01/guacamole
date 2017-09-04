@@ -1,0 +1,14 @@
+sudo: required
+services:
+  - docker
+language: ruby
+before_install:
+  - curl https://omnitruck.chef.io/install.sh | sudo bash -s -- -c current -P chefdk
+script:
+  - /opt/chefdk/bin/chef exec foodcritic -C -t correctness . || travis_terminate 1
+  - /opt/chefdk/bin/chef exec cookstyle || travis_terminate 1
+  - export KITCHEN_YAML=.kitchen.dokken.yml || travis_terminate 1
+  - /opt/chefdk/bin/chef exec kitchen create || travis_terminate 1
+  - /opt/chefdk/bin/chef exec kitchen converge || travis_terminate 1
+  - sleep 60 || travis_terminate 1
+  - /opt/chefdk/bin/chef exec kitchen verify || travis terminate 1
