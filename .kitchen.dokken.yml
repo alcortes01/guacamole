@@ -14,14 +14,14 @@ verifier:
   name: inspec
 
 platforms:
-  # - name: ubuntu-16.04
-  #   driver:
-  #     image: dokken/ubuntu-16.04
-  #     pid_one_command: /bin/systemd
-  - name: debian-9
+  - name: ubuntu-16.04
     driver:
-      image: dokken/debian-9
+      image: dokken/ubuntu-16.04
       pid_one_command: /bin/systemd
+  # - name: debian-9
+  #   driver:
+  #     image: dokken/debian-9
+  #     pid_one_command: /bin/systemd
   # - name: centos-7
   #   driver:
   #     image: dokken/centos-7

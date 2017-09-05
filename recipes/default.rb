@@ -8,7 +8,11 @@ if platform?('debian', 'ubuntu')
 
   # installs required dependencies
   package 'libcairo2-dev'
-  package 'libjpeg62-turbo-dev'
+  if platform?('debian')
+    package 'libjpeg62-turbo-dev'
+  elsif
+    package 'libjpeg-turbo8-dev'
+  end
   package 'libpng-dev'
   package 'libossp-uuid-dev'
 
@@ -116,17 +120,32 @@ if platform?('debian', 'ubuntu')
     mode '0600'
   end
 
-  directory '/var/lib/tomcat8/.guacamole' do
-    owner 'root'
-    group 'root'
-    mode '0755'
-    recursive true
-    action :create
-  end
+  if platform?('debian')
+    directory '/var/lib/tomcat8/.guacamole' do
+      owner 'root'
+      group 'root'
+      mode '0755'
+      recursive true
+      action :create
+    end
 
-  link '/var/lib/tomcat8/.guacamole/guacamole.properties' do
-    to '/etc/guacamole/guacamole.properties'
-    link_type :symbolic
+    link '/var/lib/tomcat8/.guacamole/guacamole.properties' do
+      to '/etc/guacamole/guacamole.properties'
+      link_type :symbolic
+    end
+  elsif
+    directory '/usr/share/tomcat8/.guacamole' do
+      owner 'root'
+      group 'root'
+      mode '0755'
+      recursive true
+      action :create
+    end
+
+    link '/usr/share/tomcat8/.guacamole/guacamole.properties' do
+      to '/etc/guacamole/guacamole.properties'
+      link_type :symbolic
+    end
   end
 
   # Tomcat Service
