@@ -10,7 +10,7 @@ if platform?('debian', 'ubuntu')
   package 'libcairo2-dev'
   if platform?('debian')
     package 'libjpeg62-turbo-dev'
-  elsif
+  else
     package 'libjpeg-turbo8-dev'
   end
   package 'libpng-dev'
@@ -68,7 +68,7 @@ if platform?('debian', 'ubuntu')
   end
 
   # downloads the client source code
-  war_file="#{Chef::Config[:file_cache_path]}/guacamole-client-#{guac_version}/guacamole/target/guacamole-#{guac_version}.war"
+  war_file = "#{Chef::Config[:file_cache_path]}/guacamole-client-#{guac_version}/guacamole/target/guacamole-#{guac_version}.war"
 
   remote_file "#{Chef::Config[:file_cache_path]}/guacamole-client-#{guac_version}.tar.gz" do
     source "http://apache.org/dyn/closer.cgi?action=download&filename=incubator/guacamole/#{guac_version}/source/guacamole-client-#{guac_version}.tar.gz"
@@ -86,7 +86,7 @@ if platform?('debian', 'ubuntu')
   end
 
   # build the client WAR file
-    execute 'build client WAR file' do
+  execute 'build client WAR file' do
     command 'mvn package'
     cwd "#{Chef::Config[:file_cache_path]}/guacamole-client-#{guac_version}"
     action :nothing
@@ -133,7 +133,7 @@ if platform?('debian', 'ubuntu')
       to '/etc/guacamole/guacamole.properties'
       link_type :symbolic
     end
-  elsif
+  else
     directory '/usr/share/tomcat8/.guacamole' do
       owner 'root'
       group 'root'
